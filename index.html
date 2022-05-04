@@ -4,40 +4,296 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Guess the number</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-                    <h3>Math 3911 Project</h3>
-                    <p>Theme:  Game shows on TV</p>
+
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h2> Guess the number </h2>
+                    <p> Math 3911 project</p>
+                    <p> Theme:  game shows on TV</p>
                 </section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+                <section>
+                    <section id="intro">
+                        <h2> Guess the number  </h2>
+                        <ul>
+                            <li class="fragment"> This is a game in the "Super Trio series".</li>
+                            <li class="fragment"> In this game, the players are divided into two teams.</li>
+                            <li class="fragment"> They wait in two lines and go up one by one to guess a number between 1-100 while avoiding a trigger number.  </li>
+                            <li class="fragment"> The range narrows down with each guess.  </li>
+                            <li class="fragment"> If the contestant guesses the trigger number, he loses the game and gets a penalty from others.  </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p></p>
+                    </section>
+                </section>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+                <section>
+                    <p> Click <a href="https://www.youtube.com/watch?v=ZG05X8UCaHM" target="_blank">here</a> to watch the game show on YouTube. </p>
+                    <img data-src="res/video_cap.png">
+                </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+                <section>
+                    <section>
+                        <h3> Analyse the game  </h3>
+                        <h4> Assumptions:</h4>
+                        <ul>
+                            <li class="fragment"> The trigger number is generated uniformly.
+                                <ul>
+                                    <li class="fragment"> For example, for the game starting with "1-100", 1 and 100 are not allowed
+                                to choose. 
+                                    <li class="fragment"> Then for the rest of the numbers: $2, 3, 4, \dots, 98,99,$ each number may be selected as the trigger number with the same probabiliy $\frac{1}{98}.$ 
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <p></p>
+                    </section>
+                </section>
+
+                <section>
+                        <h3> Analyse the game: assumptions</h3>
+                        <ul>
+                            <li class="fragment"> If a contestant chooses the triger number, the team of the contestant loses the game while the other team wins.</li>
+                            <li class="fragment"> For a team, the payoff of winning the game is said to be 1 and the payoff of losing the game is said to be -1.</li>
+                            <li class="fragment"> Every team member tries his best to choose the number that can maximize the expectation of the payoff for his team. 
+                                <ul>
+                                    <li>  The expectation of the payoff is the average payoff for all possible conditions.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                </section>
+
+                <section>
+                    <ul style="font-size: 80% !important;">
+                        <li> Under previous assumptions, the game is a</li>
+                        <ul>
+                            <li class="fragment"> two-person (There are two teams.)</li>
+                            <li class="fragment"> zero-sum game (When one team wins, the other team loses. The sum of the payoffs of both teams equals 0.)</li>
+                            <li class="fragment"> with finitely many pure strategies. (There are finitely many numbers to choose.) </li>
+                        </ul>
+                        <li class="fragment"> According to the <a href="https://en.wikipedia.org/wiki/Minimax_theorem" target="_blank">Von-Neumann’s theom</a>:
+                        the maximum expected payoff the first team can guarantee equals to
+                        the minimum expected payoff the second team can ensure that the first team gets no more than.</li>
+                        <li class="fragment"> This expected payoff is called the value of the game.</li>
+                    <ul>
+                </section>
+
+                <section>
+                        <h3> Equivalent Sub-games</h3>
+                        <p align="left" class="fragment" style="font-size: 70% !important;"> Sub-games with the same number of available numbers to choose are equivalent and have the same value. </p>
+                        <ul>
+                            <li class="fragment"> <small> For sub-games like "1-3", "2-4" or "5-7", there is only one number to choose. 
+                                    The first team to choose must lose and get the payoff -1. The value for such sub-games is denoted as $v(1) = -1$.  </small></li>
+                            <li class="fragment"> <small> For sub-games like "1-4", "2-5" or "5-8", there are two numbers to choose. 
+                                The first team to choose has a probability of one half to encounter the trigger number and get the payoff -1.
+                                Otherwise, the team will win and get the payoff 1.
+                                The expectation of the payoff is 0. We denote the value for such sub-games as $v(2) = 0$.</small></li>
+                            <li class="fragment"> <small> Generally, the value of a sub-game with $n$ available numbers to choose is denoted as $v(n)$. We also define $v(0)=0$.  </small></li>
+                        </ul>
+                </section>
+
+
+                <section>
+                        <h3> The value of the game</h3>
+                        <ul>
+                            <li class="fragment" style="font-size: 70% !important;"> For a sub-game with $n$ available numbers, by choosing the $i$-th number, the team  </li>
+                            <ul>
+                                <li class="fragment" style="font-size: 60% !important;">
+                                    has a probability of $\frac{1}{n}$ to get the trigger number and lose; </li>
+                                <li class="fragment" style="font-size: 60% !important;">
+                                    has a probability of $\frac{i-1}{n}$ to enter a sub-game where numbers indexed from 1 to $i-1$ are available to choose; </li>
+                                <li class="fragment" style="font-size: 60% !important;">
+                                    has a probability of $\frac{n-i}{n}$ to enter a sub-game where numbers indexed from $i+1$ to $n$ are available to choose. </li>
+                            </ul>
+                            <li class="fragment" style="font-size: 70% !important;"> The value $v(n)$ can be computed recursively:</li>
+                            <p class="fragment" style="font-size: 60% !important;"> 
+                            $$v(n) = \max_i \left\{\frac{1}{n}\cdot (-1)+ \frac{i-1}{n}\cdot(-v(i-1)) + \frac{n-i}{n}\cdot(-v(n-i)) \right\}, $$ 
+                            for $i = 1, \dots, n.$ </p>
+                            <li class="fragment" style="font-size: 70% !important;"> The indices $i$ that obtain the maximum value indicate the optimal numbers to choose.</li>
+                        </ul>
+                </section>
+
+                <section>
+                    <table style="font-size: 50% !important;">
+                        <thead>
+                            <tr>
+                                <th> $n$ </th>
+                                <th> $v(n)$ </th>
+                                <th> optimal indices to obtain $v(n)$ </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>-1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>1, 2</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>$\frac{1}{3}$</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>$0$</td>
+                                <td>2, 3</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>$-\frac{1}{5}$</td>
+                                <td>ALL</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>0</td>
+                                <td>1, 2, 5, 6</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>$\frac{1}{7}$</td>
+                                <td>2, 6</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>0</td>
+                                <td>2, 3, 6, 7</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>$-\frac{1}{9}$</td>
+                                <td>ALL</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>$0$</td>
+                                <td>1, 2, 5, 6, 9, 10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p style="font-size: 50% !important">$$v(n) = \left\{ \begin{aligned} & 0,  &\text{if} \quad n = 2k  \\
+                    & -\frac{1}{n},  &\text{if} \quad n = 4k+1  \\
+                    & \frac{1}{n},  &\text{if} \quad n = 4k+3.  
+                    \end{aligned}\right.$$</p>
+                    <p align="left" style="font-size: 50% !important">For some $n$, choosing the numbers right in the middle may not be a good strategy. 
+                    However, for all $n>1$, choosing the second number is always optimal. <p>
+                </section>
+               
+                <section>
+                        <h3> Conclusions</h3>
+                        <p align="left">For the original game starting with "1-100": </p>
+                        <ul>
+                            <li class="fragment"> The value of the game is $v(98) = 0$. Hence, in expectation, both teams will get a payoff of 0.
+                                This game is fair such that which team guesses the number first does not matter.</li>
+                            <li class="fragment"> Always choosing the second number when applicable is a simple but optimal strategy for the game. 
+                                For example, choosing 3 for "1-100", or choosing 6 for the sub-game "4-10".</li>
+                        </ul>
+                </section>
+
+                <section>
+                    <h3>variation of the game </h3>
+                    <ul style = "font-size:70% !important">
+                        <li class="fragment"> A natural question is to ask what if the trigger number is not chosen uniformly. 
+                            For example, the probability of being a trigger number for numbers ending with 8: numbers ending with 0: other numbers = 5 : 3 : 1. </li>
+                        <li class="fragment"> On that condition, sub-games like "1-4" and "7-10" are not equivalent any more.  </li>
+                        <li class="fragment"> However, we can still denote the value of a sub-game "$m$-$n$" as $v(m,n)$ and work ouk these values via a recursive formula with the aid of a computer.  </li>
+                    </ul>
+                </section>
+
+                <section>
+
+                    <h3>variation of the game </h3>
+                    <table style="font-size: 50% !important;">
+                        <thead>
+                            <tr>
+                                <th> $m$-$n$ </th>
+                                <th> $v(m, n)$ </th>
+                                <th> optimal choice </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                            <tr>
+                                <td>6-9</td>
+                                <td>0.667</td>
+                                <td>7</td>
+                            </tr>
+                            <tr>
+                                <td>6-10</td>
+                                <td>-0.429</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>6-11</td>
+                                <td>0.000</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>1-10</td>
+                                <td>0.167</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>1-50</td>
+                                <td>0.026</td>
+                                <td>46</td>
+                            </tr>
+                            <tr>
+                                <td>1-51</td>
+                                <td>-0.013</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>1-100</td>
+                                <td>0.013</td>
+                                <td>96</td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                    <p align="left" style="font-size: 50% !important"> This time, the game is not fair. As $v(1, 100) >0$, the first team has an advantage. <p>
+                    <p align="left" style="font-size: 50% !important"> Intuitively, we should avoid numbers ending with 8 or 0 if possible, but this is not true. For the sub-game "6-10", 8 is the optimal choice; and for the sub-game "6-11", 10 is the optimal choice! <p>
+                </section>
+
+                <section >
+                        <h1>END </h1>
+                </section>
+            </div>
+        </div>
+
+        <script src="dist/reveal.js"></script>
+        <script src="plugin/notes/notes.js"></script>
+        <script src="plugin/markdown/markdown.js"></script>
+        <script src="plugin/highlight/highlight.js"></script>
+        <script src="plugin/math/math.js"></script>
+
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+                transition: 'zoom',
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+            });
+        </script>
+    </body>
 </html>
