@@ -1,17 +1,17 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Guess the number</title>
+        <title>Guess the number</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/solarized.css">
+        <link rel="stylesheet" href="dist/reset.css">
+        <link rel="stylesheet" href="dist/reveal.css">
+        <link rel="stylesheet" href="dist/theme/solarized.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="plugin/highlight/monokai.css">
 
     </head>
     <body>
@@ -21,6 +21,7 @@
                     <h2> Guess the number </h2>
                     <p> Math 3911 project</p>
                     <p> Theme:  game shows on TV</p>
+                    <p style="bottom: 10"><small>(Use the arrow keys on the bottom or the keyboard to navigate)</small> </p>
                 </section>
                 <section>
                     <section id="intro">
@@ -39,40 +40,46 @@
                 </section>
 
                 <section>
-                    <p> Click <a href="https://www.youtube.com/watch?v=ZG05X8UCaHM" target="_blank">here</a> to watch the game show on YouTube. </p>
+                    <p> Click <a href="https://www.youtube.com/watch?v=ZG05X8UCaHM" target="_blank">here</a> to watch the game show on YouTube. You can also play a <a href="#/3">mini-game </a> starting from "1-10". </p>
                     <img data-src="res/video_cap.png">
                 </section>
 
+
+				<section data-background-iframe="game/index.html" data-background-interactive>
+                </section>
+
                 <section>
                     <section>
-                        <h3> Analyse the game  </h3>
-                        <h4> Assumptions:</h4>
-                        <ul>
-                            <li class="fragment"> The trigger number is generated uniformly.
-                                <ul>
-                                    <li class="fragment"> For example, for the game starting with "1-100", 1 and 100 are not allowed
-                                to choose. 
-                                    <li class="fragment"> Then for the rest of the numbers: $2, 3, 4, \dots, 98,99,$ each number may be selected as the trigger number with the same probabiliy $\frac{1}{98}.$ 
-                                </ul>
-                            </li>
-                        </ul>
-                    </section>
-                    <section>
-                        <p></p>
+                        <section>
+                            <h3> Analyse the game  </h3>
+                            <h4> Assumptions:</h4>
+                            <ul>
+                                <li class="fragment"> The trigger number is generated uniformly.
+                                    <ul>
+                                        <li class="fragment"> For example, for the game starting with "1-100", 1 and 100 are not allowed
+                                            to choose. 
+                                            <li class="fragment"> Then for the rest of the numbers: $2, 3, 4, \dots, 98,99,$ each number may be selected as the trigger number with the same probabiliy $\frac{1}{98}.$ 
+                                    </ul>
+                                            </li>
+                            </ul>
+                        </section>
+                        <section>
+                            <p></p>
+                        </section>
                     </section>
                 </section>
 
                 <section>
-                        <h3> Analyse the game: assumptions</h3>
-                        <ul>
-                            <li class="fragment"> If a contestant chooses the triger number, the team of the contestant loses the game while the other team wins.</li>
-                            <li class="fragment"> For a team, the payoff of winning the game is said to be 1 and the payoff of losing the game is said to be -1.</li>
-                            <li class="fragment"> Every team member tries his best to choose the number that can maximize the expectation of the payoff for his team. 
-                                <ul>
-                                    <li>  The expectation of the payoff is the average payoff for all possible conditions.</li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <h3> Analyse the game: assumptions</h3>
+                    <ul>
+                        <li class="fragment"> If a contestant chooses the triger number, the team of the contestant loses the game while the other team wins.</li>
+                        <li class="fragment"> For a team, the payoff of winning the game is said to be 1 and the payoff of losing the game is said to be -1.</li>
+                        <li class="fragment"> Every team member tries his best to choose the number that can maximize the expectation of the payoff for his team. 
+                            <ul>
+                                <li>  The expectation of the payoff is the average payoff for all possible conditions.</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </section>
 
                 <section>
@@ -84,45 +91,45 @@
                             <li class="fragment"> with finitely many pure strategies. (There are finitely many numbers to choose.) </li>
                         </ul>
                         <li class="fragment"> According to the <a href="https://en.wikipedia.org/wiki/Minimax_theorem" target="_blank">Von-Neumann’s theom</a>:
-                        the maximum expected payoff the first team can guarantee equals to
-                        the minimum expected payoff the second team can ensure that the first team gets no more than.</li>
+                            the maximum expected payoff the first team can guarantee equals to
+                            the minimum expected payoff the second team can ensure that the first team gets no more than.</li>
                         <li class="fragment"> This expected payoff is called the value of the game.</li>
-                    <ul>
+                        <ul>
                 </section>
 
                 <section>
-                        <h3> Equivalent Sub-games</h3>
-                        <p align="left" class="fragment" style="font-size: 70% !important;"> Sub-games with the same number of available numbers to choose are equivalent and have the same value. </p>
-                        <ul>
-                            <li class="fragment"> <small> For sub-games like "1-3", "2-4" or "5-7", there is only one number to choose. 
-                                    The first team to choose must lose and get the payoff -1. The value for such sub-games is denoted as $v(1) = -1$.  </small></li>
-                            <li class="fragment"> <small> For sub-games like "1-4", "2-5" or "5-8", there are two numbers to choose. 
+                    <h3> Equivalent Sub-games</h3>
+                    <p align="left" class="fragment" style="font-size: 70% !important;"> Sub-games with the same number of available numbers to choose are equivalent and have the same value. </p>
+                    <ul>
+                        <li class="fragment"> <small> For sub-games like "1-3", "2-4" or "5-7", there is only one number to choose. 
+                                The first team to choose must lose and get the payoff -1. The value for such sub-games is denoted as $v(1) = -1$.  </small></li>
+                        <li class="fragment"> <small> For sub-games like "1-4", "2-5" or "5-8", there are two numbers to choose. 
                                 The first team to choose has a probability of one half to encounter the trigger number and get the payoff -1.
                                 Otherwise, the team will win and get the payoff 1.
                                 The expectation of the payoff is 0. We denote the value for such sub-games as $v(2) = 0$.</small></li>
-                            <li class="fragment"> <small> Generally, the value of a sub-game with $n$ available numbers to choose is denoted as $v(n)$. We also define $v(0)=0$.  </small></li>
-                        </ul>
+                        <li class="fragment"> <small> Generally, the value of a sub-game with $n$ available numbers to choose is denoted as $v(n)$. We also define $v(0)=0$.  </small></li>
+                    </ul>
                 </section>
 
 
                 <section>
-                        <h3> The value of the game</h3>
+                    <h3> The value of the game</h3>
+                    <ul>
+                        <li class="fragment" style="font-size: 70% !important;"> For a sub-game with $n$ available numbers, by choosing the $i$-th number, the team  </li>
                         <ul>
-                            <li class="fragment" style="font-size: 70% !important;"> For a sub-game with $n$ available numbers, by choosing the $i$-th number, the team  </li>
-                            <ul>
-                                <li class="fragment" style="font-size: 60% !important;">
-                                    has a probability of $\frac{1}{n}$ to get the trigger number and lose; </li>
-                                <li class="fragment" style="font-size: 60% !important;">
-                                    has a probability of $\frac{i-1}{n}$ to enter a sub-game where numbers indexed from 1 to $i-1$ are available to choose; </li>
-                                <li class="fragment" style="font-size: 60% !important;">
-                                    has a probability of $\frac{n-i}{n}$ to enter a sub-game where numbers indexed from $i+1$ to $n$ are available to choose. </li>
-                            </ul>
-                            <li class="fragment" style="font-size: 70% !important;"> The value $v(n)$ can be computed recursively:</li>
-                            <p class="fragment" style="font-size: 60% !important;"> 
-                            $$v(n) = \max_i \left\{\frac{1}{n}\cdot (-1)+ \frac{i-1}{n}\cdot(-v(i-1)) + \frac{n-i}{n}\cdot(-v(n-i)) \right\}, $$ 
-                            for $i = 1, \dots, n.$ </p>
-                            <li class="fragment" style="font-size: 70% !important;"> The indices $i$ that obtain the maximum value indicate the optimal numbers to choose.</li>
+                            <li class="fragment" style="font-size: 60% !important;">
+                                has a probability of $\frac{1}{n}$ to get the trigger number and lose; </li>
+                            <li class="fragment" style="font-size: 60% !important;">
+                                has a probability of $\frac{i-1}{n}$ to enter a sub-game where numbers indexed from 1 to $i-1$ are available to choose; </li>
+                            <li class="fragment" style="font-size: 60% !important;">
+                                has a probability of $\frac{n-i}{n}$ to enter a sub-game where numbers indexed from $i+1$ to $n$ are available to choose. </li>
                         </ul>
+                        <li class="fragment" style="font-size: 70% !important;"> The value $v(n)$ can be computed recursively:</li>
+                        <p class="fragment" style="font-size: 60% !important;"> 
+                        $$v(n) = \max_i \left\{\frac{1}{n}\cdot (-1)+ \frac{i-1}{n}\cdot(-v(i-1)) + \frac{n-i}{n}\cdot(-v(n-i)) \right\}, $$ 
+                        for $i = 1, \dots, n.$ </p>
+                        <li class="fragment" style="font-size: 70% !important;"> The indices $i$ that obtain the maximum value indicate the optimal numbers to choose.</li>
+                    </ul>
                 </section>
 
                 <section>
@@ -132,13 +139,13 @@
                                 <th> $n$ </th>
                                 <th> $v(n)$ </th>
                                 <th> optimal indices to obtain $v(n)$ </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>-1</td>
-                                <td>1</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>-1</td>
+                                    <td>1</td>
                             </tr>
                             <tr>
                                 <td>2</td>

@@ -1,0 +1,188 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://Hub.gd" type="Script" id=3]
+[ext_resource path="res://sound/start.mp3" type="AudioStream" id=4]
+[ext_resource path="res://sound/button.mp3" type="AudioStream" id=5]
+[ext_resource path="res://sound/explosion.mp3" type="AudioStream" id=6]
+[ext_resource path="res://Bomb_icon.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 130
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 120
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.415686, 0.376471, 0.376471, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 100
+font_data = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0.414063, 0.376862, 0.376862, 1 )
+
+[node name="Hub" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="title" type="Label" parent="Hub"]
+margin_left = 120.0
+margin_top = 205.0
+margin_right = 1800.0
+margin_bottom = 362.0
+custom_fonts/font = SubResource( 1 )
+text = "GUESS THE NUMBER"
+align = 1
+
+[node name="start" type="Button" parent="Hub"]
+margin_left = 663.0
+margin_top = 577.0
+margin_right = 1230.0
+margin_bottom = 722.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 9 )
+text = "START"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hub"]
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 1800.0
+margin_bottom = 240.0
+alignment = 1
+
+[node name="1" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 70.0
+margin_right = 220.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "1"
+
+[node name="2" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 224.0
+margin_right = 374.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "2"
+
+[node name="3" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 378.0
+margin_right = 528.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "3"
+
+[node name="4" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 532.0
+margin_right = 682.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "4"
+
+[node name="5" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 686.0
+margin_right = 836.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "5"
+
+[node name="6" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 840.0
+margin_right = 990.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "6"
+
+[node name="7" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 994.0
+margin_right = 1144.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "7"
+
+[node name="8" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 1148.0
+margin_right = 1298.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "8"
+
+[node name="9" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 1302.0
+margin_right = 1452.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "9"
+
+[node name="10" type="Button" parent="Hub/HBoxContainer"]
+margin_left = 1456.0
+margin_right = 1610.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 150, 150 )
+custom_fonts/font = SubResource( 8 )
+text = "10"
+
+[node name="start_music" type="AudioStreamPlayer2D" parent="Hub"]
+position = Vector2( 120, 80 )
+stream = ExtResource( 4 )
+
+[node name="message" type="Label" parent="Hub"]
+margin_left = 120.0
+margin_top = 370.0
+margin_right = 1800.0
+margin_bottom = 527.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 1
+
+[node name="Timer" type="Timer" parent="Hub"]
+
+[node name="button_music" type="AudioStreamPlayer2D" parent="Hub"]
+position = Vector2( 120, 80 )
+stream = ExtResource( 5 )
+
+[node name="score_txt" type="Label" parent="Hub"]
+margin_left = 130.0
+margin_top = 838.0
+margin_right = 1810.0
+margin_bottom = 995.0
+custom_fonts/font = SubResource( 1 )
+text = "win 0        lose 0"
+align = 1
+
+[node name="number" type="AudioStreamPlayer2D" parent="Hub"]
+
+[node name="bang" type="AudioStreamPlayer2D" parent="Hub"]
+position = Vector2( 240, 160 )
+stream = ExtResource( 6 )
+
+[node name="turn_txt" type="Label" parent="Hub"]
+margin_left = 120.0
+margin_top = 555.0
+margin_right = 1800.0
+margin_bottom = 712.0
+custom_fonts/font = SubResource( 1 )
+text = "Your turn"
+align = 1
+
+[node name="Sprite" type="Sprite" parent="Hub"]
+position = Vector2( 990, -92 )
+scale = Vector2( 0.270325, 0.258519 )
+texture = ExtResource( 7 )
